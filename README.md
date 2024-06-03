@@ -1,7 +1,11 @@
-Proyecto JDBC Programación - Base de Datos
+# Proyecto JDBC Programación - Base de Datos
 
-Cristian Navarro
+**Cristian Navarro**
 
-Ignacio Nicolás Laureano
+**Ignacio Nicolás Laureano**
 
-Adrián Gómez
+**Adrián Gómez**
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
