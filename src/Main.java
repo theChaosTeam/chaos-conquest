@@ -1,12 +1,11 @@
-import java.sql.*;
-
 public class Main {
-    public static void main (String[] args) throws SQLException {
+    public static void main (String[] args) {
 
         boolean endProgram = false;
-        Menu.connectUser();
 
         do {
+
+            Menu.connectUser();
 
             switch (Menu.checkRole()) {
 
@@ -41,7 +40,10 @@ public class Main {
                     break;
             }
 
-            Menu.connectUser();
+            if (Menu.checkExit()){
+                endProgram = true;
+            }
+
         } while(!endProgram);
 
     }
