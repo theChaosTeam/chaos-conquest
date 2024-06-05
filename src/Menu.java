@@ -58,6 +58,7 @@ public class Menu {
 
         boolean exit = false;
         Statement statement = connection.createStatement();
+        statement.execute("USE chaos_conquest");
 
         do {
             System.out.println("You logged in as a Data Analyst");
@@ -93,44 +94,64 @@ public class Menu {
                     break;
 
                 case 1:
+                    statement.execute("SELECT * FROM champion");
 
                 case 2:
+                    statement.execute("SELECT * FROM championability");
 
                 case 3:
+                    statement.execute("SELECT * FROM championskin");
 
                 case 4:
+                    statement.execute("SELECT * FROM clash");
 
                 case 5:
+                    statement.execute("SELECT * FROM clashparticipant");
 
                 case 6:
+                    statement.execute("SELECT * FROM competitiverank");
 
                 case 7:
+                    statement.execute("SELECT * FROM damagetype");
 
                 case 8:
+                    statement.execute("SELECT * FROM item");
 
                 case 9:
+                    statement.execute("SELECT * FROM itemloadout");
 
                 case 10:
+                    statement.execute("SELECT * FROM itemstat");
 
                 case 11:
+                    statement.execute("SELECT * FROM mastery");
 
                 case 12:
+                    statement.execute("SELECT * FROM matchhistory");
 
                 case 13:
+                    statement.execute("SELECT * FROM matchstats");
 
                 case 14:
+                    statement.execute("SELECT * FROM ownedchampions");
 
                 case 15:
+                    statement.execute("SELECT * FROM ownedskins");
 
                 case 16:
+                    statement.execute("SELECT * FROM patchhistory");
 
                 case 17:
+                    statement.execute("SELECT * FROM player");
 
                 case 18:
+                    statement.execute("SELECT * FROM rune");
 
                 case 19:
+                    statement.execute("SELECT * FROM runeloadout");
 
                 case 20:
+                    statement.execute("SELECT * FROM runepath");
 
                 default:
 
