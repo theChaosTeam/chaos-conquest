@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Menu {
 
@@ -60,8 +57,8 @@ public class Menu {
         Statement statement = connection.createStatement();
         statement.execute("USE chaos_conquest");
 
+        System.out.println("You logged in as a Data Analyst");
         do {
-            System.out.println("You logged in as a Data Analyst");
             System.out.println("Select the table you want to see or put 0 to close the actual session:");
             System.out.println("0.Close session");
             System.out.println("1.Champion");
@@ -90,12 +87,22 @@ public class Menu {
             switch (option) {
 
                 case 0:
+
                     exit = true;
                     break;
 
                 case 1:
-                    statement.execute("SELECT * FROM champion");
 
+                    ResultSet resultSet = statement.executeQuery("SELECT * FROM champion");
+                    int columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
                 case 2:
                     statement.execute("SELECT * FROM championability");
 
