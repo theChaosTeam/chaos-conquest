@@ -446,8 +446,10 @@ public class Menu {
                             int MostPlayedChampion = Lectura.numeroEnter();
 
                             statement.executeQuery("INSERT INTO player(NickName, Level, Rank, MostPlayedChampion) VALUES (NickName, Level, Rank, MostPlayedChampion)");
+                            System.out.println("Done");
 
                             break;
+
                         case 2:
                             System.out.println("Insert the champions ID:");
                             int ChampionsID = Lectura.numeroEnter();
@@ -480,6 +482,8 @@ public class Menu {
                             System.out.println("Insert the Team:");
                             String Team = Lectura.cadena();
 
+                            statement.executeQuery("INSERT INTO matchstats(Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team) VALUES (Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team)");
+                            System.out.println("Done");
 
 
                             break;
