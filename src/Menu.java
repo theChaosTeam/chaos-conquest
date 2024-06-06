@@ -354,9 +354,157 @@ public class Menu {
         System.out.println("You logged in as a Player");
     }
 
-    public static void PublicVisitant(Connection connection) {
+    public static void PublicVisitant(Connection connection) throws SQLException{
+
+        boolean exit = false;
+        Statement statement = connection.createStatement();
+        statement.execute("USE chaos_conquest");
 
         System.out.println("You logged in as a Public Visitant");
+
+        do {
+            System.out.println("Select the table you want to see or put 0 to close the actual session:");
+            System.out.println("0.Close session");
+            System.out.println("1.Champion");
+            System.out.println("2.ChampionAbility");
+            System.out.println("3.CompetitiveRank");
+            System.out.println("4.DamageType");
+            System.out.println("5.Item");
+            System.out.println("6.ItemStat");
+            System.out.println("7.PatchHistory");
+            System.out.println("8.Player");
+            System.out.println("9.Rune");
+
+            int option = Lectura.numeroEnter();
+
+            ResultSet resultSet;
+            int columnCount;
+
+            switch (option) {
+
+                case 0:
+
+                    exit = true;
+                    break;
+
+                case 1:
+
+                    resultSet = statement.executeQuery("SELECT * FROM champion");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 2:
+
+                    resultSet = statement.executeQuery("SELECT * FROM championability");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 3:
+                    resultSet = statement.executeQuery("SELECT * FROM competitiverank");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 4:
+                    resultSet = statement.executeQuery("SELECT * FROM damagetype");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 5:
+                    resultSet = statement.executeQuery("SELECT * FROM item");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 6:
+                    resultSet = statement.executeQuery("SELECT * FROM itemstat");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 7:
+                    resultSet = statement.executeQuery("SELECT * FROM patchhistory");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 8:
+                    resultSet = statement.executeQuery("SELECT * FROM player");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 9:
+                    resultSet = statement.executeQuery("SELECT * FROM rune");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                default:
+
+                    System.out.println("Invalid option");
+                    break;
+            }
+        } while (!exit);
+
+
     }
 
     public static int checkRole() {
