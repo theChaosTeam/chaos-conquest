@@ -503,6 +503,55 @@ public class Menu {
                         System.out.println();
                     }
                     break;
+
+                case 9:
+                    resultSet = statement.executeQuery("SELECT * FROM competitiverank");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 10:
+                    resultSet = statement.executeQuery("SELECT * FROM damagetype");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 11:
+                    resultSet = statement.executeQuery("SELECT * FROM item");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 12:
+                    resultSet = statement.executeQuery("SELECT * FROM itemloadout");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
                     default:
 
                     System.out.println("Invalid option");
