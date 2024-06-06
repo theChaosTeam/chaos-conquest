@@ -471,8 +471,14 @@ public class Menu {
                             int Deaths = Lectura.numeroEnter();
                             System.out.println("Insert the assists:");
                             int Assists = Lectura.numeroEnter();
-                            System.out.println("Insert the GoldEarned:");
+                            System.out.println("Insert the Gold Earned:");
                             int GoldEarned = Lectura.numeroEnter();
+                            System.out.println("Insert the Dealt Damage:");
+                            int DealtDamage = Lectura.numeroEnter();
+                            System.out.println("Insert the Recived Damage:");
+                            int RecivedDamage = Lectura.numeroEnter();
+                            System.out.println("Insert the Team:");
+                            String Team = Lectura.cadena();
 
 
 
