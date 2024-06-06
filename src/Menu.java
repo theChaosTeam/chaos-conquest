@@ -84,8 +84,8 @@ public class Menu {
 
             int option = Lectura.numeroEnter();
 
-            ResultSet resultSet = null;
-            int columnCount = 0;
+            ResultSet resultSet;
+            int columnCount;
 
             switch (option) {
 
