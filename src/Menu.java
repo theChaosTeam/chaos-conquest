@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Menu {
 
@@ -344,9 +346,156 @@ public class Menu {
         } while (!exit);
     }
 
-    public static void ComunityMod(Connection connection) {
+    public static void ComunityMod(Connection connection) throws SQLException {
 
         System.out.println("You logged in as Community Moderator");
+
+        boolean exit = false;
+        Statement statement = connection.createStatement();
+        statement.execute("USE chaos_conquest");
+
+        do {
+            System.out.println("What option do you want to use?");
+            System.out.println("0. Close session");
+            System.out.println("1. Select");
+            System.out.println("2. Insert");
+            System.out.println("3. Update");
+
+            int option = Lectura.numeroEnter();
+
+            switch (option){
+                case 0:
+
+                    exit = true;
+                    break;
+
+                case 1:
+                    System.out.println("What table do you want select?");
+                    System.out.println("0. Back");
+                    System.out.println("1. Player");
+                    System.out.println("2. Match History");
+                    System.out.println("3. Match Stats");
+
+                    int select = Lectura.numeroEnter();
+                    ResultSet resultSet;
+                    int columnCount;
+
+                    switch(select){
+                        case 0:
+
+                            break;
+                        case 1:
+
+                            resultSet = statement.executeQuery("SELECT * FROM player");
+                            columnCount = resultSet.getMetaData().getColumnCount();
+
+                            while (resultSet.next()) {
+                                for (int i = 1; i <= columnCount; i++) {
+                                    System.out.print(resultSet.getString(i) + "\t");
+                                }
+                                System.out.println();
+                            }
+                            break;
+                        case 2:
+
+                            resultSet = statement.executeQuery("SELECT * FROM matchhistory");
+                            columnCount = resultSet.getMetaData().getColumnCount();
+
+                            while (resultSet.next()) {
+                                for (int i = 1; i <= columnCount; i++) {
+                                    System.out.print(resultSet.getString(i) + "\t");
+                                }
+                                System.out.println();
+                            }
+                            break;
+                        case 3:
+
+                            resultSet = statement.executeQuery("SELECT * FROM matchstats");
+                            columnCount = resultSet.getMetaData().getColumnCount();
+
+                            while (resultSet.next()) {
+                                for (int i = 1; i <= columnCount; i++) {
+                                    System.out.print(resultSet.getString(i) + "\t");
+                                }
+                                System.out.println();
+                            }
+                            break;
+                    }
+                    break;
+                case 2:
+                    System.out.println("What table do you want insert?");
+                    System.out.println("0. Back");
+                    System.out.println("1. Player");
+                    System.out.println("2. Match History");
+                    System.out.println("3. Match Stats");
+
+                    int insert = Lectura.numeroEnter();
+                    switch (insert){
+                        case 0:
+                            break;
+
+                        case 1:
+
+                            System.out.println("Insert the name of the player:");
+                            String NickName = Lectura.cadena();
+                            System.out.println("Insert the level of the player:");
+                            int Level = Lectura.numeroEnter();
+                            System.out.println("Insert the rank of the player:");
+                            int Rank = Lectura.numeroEnter();
+                            System.out.println("Insert the Most Player Champions of the player:");
+                            int MostPlayedChampion = Lectura.numeroEnter();
+
+                            statement.executeQuery("INSERT INTO player(NickName, Level, Rank, MostPlayedChampion) VALUES (NickName, Level, Rank, MostPlayedChampion)");
+
+                            break;
+                        case 2:
+                            System.out.println("Insert the champions ID:");
+                            int ChampionsID = Lectura.numeroEnter();
+                            System.out.println("Insert the Winner Team:");
+                            String WinnerTeam = Lectura.cadena();
+                            System.out.println("Insert the Match Duration");
+                            Time MatchDuration = Time.valueOf(Lectura.cadena());
+                            System.out.println("Insert the Match Date");
+                            DateTimeFormatter MatchDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                            statement.executeQuery("INSERT INTO matchhistory(ChampionsID, WinnerTeam, MatchDuration, MatchDate) VALUES (ChampionsID, WinnerTeam, MatchDuration, MatchDate)");
+                            System.out.println("Done");
+
+                            break;
+
+                        case 3:
+
+                            System.out.println("Insert the kills:");
+                            int Kills = Lectura.numeroEnter();
+                            System.out.println("Insert the deaths:");
+                            int Deaths = Lectura.numeroEnter();
+                            System.out.println("Insert the assists:");
+                            int Assists = Lectura.numeroEnter();
+                            System.out.println("Insert the GoldEarned:");
+                            int GoldEarned = Lectura.numeroEnter();
+
+
+
+                            break;
+                    }
+
+
+
+
+                    break;
+                case 3:
+                    System.out.println("What table do you want update?");
+                    System.out.println("0. Back");
+                    System.out.println("1. Player");
+                    System.out.println("2. Match History");
+                    System.out.println("3. Match Stats");
+                    break;
+            }
+
+        } while (!exit);
+
+
+
     }
 
     public static void Player(Connection connection) {
