@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 
 public class Menu {
@@ -107,9 +108,185 @@ public class Menu {
         selectMenu(exit, statement);
     }
 
-    public static void ComunityMod(Connection connection) {
+    public static void ComunityMod(Connection connection) throws SQLException{
 
         System.out.println("You logged in as Community Moderator");
+
+        boolean exit = false;
+        Statement statement = connection.createStatement();
+        statement.execute("USE chaos_conquest");
+
+        do {
+
+            System.out.println("What option do you want to use?");
+            System.out.println("0. Close session");
+            System.out.println("1. Select");
+            System.out.println("2. Insert");
+            System.out.println("3. Update");
+
+            switch (Lectura.numeroEnter()){
+
+                case 0:
+
+                    exit = true;
+                    break;
+
+                case 1:
+
+                    System.out.println("What table do you want select?");
+                    System.out.println("0. Back");
+                    System.out.println("1. Player");
+                    System.out.println("2. Match History");
+                    System.out.println("3. Match Stats");
+
+                    ResultSet resultSet;
+                    int columnCount;
+
+                    switch(Lectura.numeroEnter()){
+
+                        case 0:
+
+                            break;
+
+                        case 1:
+
+                            resultSet = statement.executeQuery("SELECT * FROM player");
+                            columnCount = resultSet.getMetaData().getColumnCount();
+
+                            while (resultSet.next()) {
+
+                                for (int i = 1; i <= columnCount; i++) {
+
+                                    System.out.print(resultSet.getString(i) + "\t");
+                                }
+                                System.out.println();
+                            }
+                            break;
+
+                        case 2:
+
+                            resultSet = statement.executeQuery("SELECT * FROM matchhistory");
+                            columnCount = resultSet.getMetaData().getColumnCount();
+
+                            while (resultSet.next()) {
+                                for (int i = 1; i <= columnCount; i++) {
+                                    System.out.print(resultSet.getString(i) + "\t");
+                                }
+                                System.out.println();
+                            }
+                            break;
+
+                        case 3:
+
+                            resultSet = statement.executeQuery("SELECT * FROM matchstats");
+                            columnCount = resultSet.getMetaData().getColumnCount();
+
+                            while (resultSet.next()) {
+
+                                for (int i = 1; i <= columnCount; i++) {
+
+                                    System.out.print(resultSet.getString(i) + "\t");
+                                }
+                                System.out.println();
+                            }
+                            break;
+                    }
+                    break;
+
+                case 2:
+
+                    System.out.println("What table do you want insert?");
+                    System.out.println("0. Back");
+                    System.out.println("1. Player");
+                    System.out.println("2. Match History");
+                    System.out.println("3. Match Stats");
+
+                    switch (Lectura.numeroEnter()){
+
+                        case 0:
+
+                            break;
+
+                        case 1:
+
+                            System.out.println("Insert the name of the player:");
+                            String NickName = Lectura.cadena();
+
+                            System.out.println("Insert the level of the player:");
+                            int Level = Lectura.numeroEnter();
+
+                            System.out.println("Insert the rank of the player:");
+                            int Rank = Lectura.numeroEnter();
+
+                            System.out.println("Insert the Most Player Champions of the player:");
+                            int MostPlayedChampion = Lectura.numeroEnter();
+
+                            statement.executeQuery("INSERT INTO player(NickName, Level, Rank, MostPlayedChampion) VALUES (NickName, Level, Rank, MostPlayedChampion)");
+                            System.out.println("Done");
+
+                            break;
+
+                        case 2:
+
+                            System.out.println("Insert the champions ID:");
+                            int ChampionsID = Lectura.numeroEnter();
+
+                            System.out.println("Insert the Winner Team:");
+                            String WinnerTeam = Lectura.cadena();
+
+                            System.out.println("Insert the Match Duration");
+                            Time MatchDuration = Time.valueOf(Lectura.cadena());
+
+                            System.out.println("Insert the Match Date");
+                            DateTimeFormatter MatchDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                            statement.executeQuery("INSERT INTO matchhistory(ChampionsID, WinnerTeam, MatchDuration, MatchDate) VALUES (ChampionsID, WinnerTeam, MatchDuration, MatchDate)");
+                            System.out.println("Done");
+
+                            break;
+
+                        case 3:
+
+                            System.out.println("Insert the kills:");
+                            int Kills = Lectura.numeroEnter();
+
+                            System.out.println("Insert the deaths:");
+                            int Deaths = Lectura.numeroEnter();
+
+                            System.out.println("Insert the assists:");
+                            int Assists = Lectura.numeroEnter();
+
+                            System.out.println("Insert the Gold Earned:");
+                            int GoldEarned = Lectura.numeroEnter();
+
+                            System.out.println("Insert the Dealt Damage:");
+                            int DealtDamage = Lectura.numeroEnter();
+
+                            System.out.println("Insert the Recived Damage:");
+                            int RecivedDamage = Lectura.numeroEnter();
+
+                            System.out.println("Insert the Team:");
+                            String Team = Lectura.cadena();
+
+                            statement.executeQuery("INSERT INTO matchstats(Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team) VALUES (Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team)");
+                            System.out.println("Done");
+
+                            break;
+                    }
+
+                    break;
+
+                case 3:
+
+                    System.out.println("What table do you want update?");
+                    System.out.println("0. Back");
+                    System.out.println("1. Player");
+                    System.out.println("2. Match History");
+                    System.out.println("3. Match Stats");
+                    break;
+            }
+
+        } while (!exit);
     }
 
     public static void Player(Connection connection) throws SQLException {
@@ -119,6 +296,7 @@ public class Menu {
         statement.execute("USE chaos_conquest");
 
         do {
+
             System.out.println("Select the table you want to use or put 0 to close the actual session:");
             System.out.println("0.Close session");
             System.out.println("1.Add or see an existing ItemLoadout");
@@ -155,39 +333,52 @@ public class Menu {
                     break;
 
                 case 1:
+
                     try{
+
                         System.out.println("Insert the number of the ItemID:");
                         int newItemID = Lectura.numeroEnter();
 
                         statement.executeUpdate("INSERT INTO itemloadout(ItemID) VALUES (" + newItemID + ")");
                         System.out.println("Inserting item loadout...");
                         System.out.println("Done");
+
                         break;
+
                     } catch (InputMismatchException e){
+
                         System.out.println("Error: could not insert the itemloadout, please insert the ItemID (number)");
                         break;
                     }
 
                 case 2:
+
                     try{
+
                         System.out.println("Insert the number of the RuneID:");
                         int newRuneID = Lectura.numeroEnter();
 
                         statement.executeUpdate("INSERT INTO runeloadout(ItemID) VALUES (" + newRuneID + ")");
                         System.out.println("Inserting rune loadout...");
                         System.out.println("Done");
+
                         break;
+
                     } catch (InputMismatchException e) {
+
                         System.out.println("Error: could not insert the runeloadout, please insert the ItemID (number)");
                         break;
                     }
 
                 case 3:
+
                     resultSet = statement.executeQuery("SELECT * FROM player");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
@@ -200,7 +391,9 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
@@ -208,6 +401,7 @@ public class Menu {
                     break;
 
                 case 5:
+
                     System.out.println("Introduce the ID of the champion you want to see the abilities of:");
                     int abilityChampionID = Lectura.numeroEnter();
 
@@ -215,7 +409,9 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.println(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
@@ -223,6 +419,7 @@ public class Menu {
                     break;
 
                 case 6:
+
                     System.out.println("Introduce the ID of the champion you want to see the skins of:");
                     int skinChampionID = Lectura.numeroEnter();
 
@@ -230,7 +427,9 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.println(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
@@ -238,11 +437,14 @@ public class Menu {
                     break;
 
                 case 7:
+
                     resultSet = statement.executeQuery("SELECT * from clash");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.println(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
@@ -250,6 +452,7 @@ public class Menu {
                     break;
 
                 case 8:
+
                     System.out.println("Introduce the ID of the clash from who you want to see the participants of:");
                     int participantsClashID = Lectura.numeroEnter();
 
@@ -257,12 +460,16 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.println(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
+
                 default:
 
                     System.out.println("Invalid option");
@@ -280,6 +487,7 @@ public class Menu {
         System.out.println("You logged in as a Public Visitant");
 
         do {
+
             System.out.println("Select the table you want to see or put 0 to close the actual session:");
             System.out.println("0.Close session");
             System.out.println("1.Champion");
@@ -308,11 +516,14 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 2:
@@ -321,95 +532,126 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 3:
+
                     resultSet = statement.executeQuery("SELECT * FROM competitiverank");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 4:
+
                     resultSet = statement.executeQuery("SELECT * FROM damagetype");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 5:
+
                     resultSet = statement.executeQuery("SELECT * FROM item");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 6:
+
                     resultSet = statement.executeQuery("SELECT * FROM itemstat");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 7:
+
                     resultSet = statement.executeQuery("SELECT * FROM patchhistory");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 8:
+
                     resultSet = statement.executeQuery("SELECT * FROM player");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 9:
+
                     resultSet = statement.executeQuery("SELECT * FROM rune");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 default:
@@ -417,9 +659,8 @@ public class Menu {
                     System.out.println("Invalid option");
                     break;
             }
+
         } while (!exit);
-
-
     }
 
     public static int checkRole() {
@@ -439,6 +680,7 @@ public class Menu {
         }
 
         role = switch (roleName.toString()) {
+
             case "Admin" -> 1;
             case "Dev" -> 2;
             case "DA" -> 3;
@@ -460,7 +702,9 @@ public class Menu {
     }
 
     private static void selectMenu(boolean exit, Statement statement) throws SQLException {
+
         do {
+
             System.out.println("Select the table you want to see or put 0 to close the actual session:");
             System.out.println("0.Close session");
             System.out.println("1.Champion");
@@ -500,11 +744,14 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 2:
@@ -513,35 +760,46 @@ public class Menu {
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 3:
+
                     resultSet = statement.executeQuery("SELECT * FROM championskin");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 4:
+
                     resultSet = statement.executeQuery("SELECT * FROM clash");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
+
                         for (int i = 1; i <= columnCount; i++) {
+
                             System.out.print(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
                     }
+
                     break;
 
                 case 5:
