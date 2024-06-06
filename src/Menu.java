@@ -217,8 +217,7 @@ public class Menu {
                     break;
 
                 case 11:
-                    statement.execute("SELECT * FROM mastery");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM mastery");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -230,8 +229,7 @@ public class Menu {
                     break;
 
                 case 12:
-                    statement.execute("SELECT * FROM matchhistory");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM matchhistory");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -243,8 +241,7 @@ public class Menu {
                     break;
 
                 case 13:
-                    statement.execute("SELECT * FROM matchstats");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM matchstats");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -256,8 +253,7 @@ public class Menu {
                     break;
 
                 case 14:
-                    statement.execute("SELECT * FROM ownedchampions");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM ownedchampions");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -269,8 +265,7 @@ public class Menu {
                     break;
 
                 case 15:
-                    statement.execute("SELECT * FROM ownedskins");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM ownedskins");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -282,8 +277,7 @@ public class Menu {
                     break;
 
                 case 16:
-                    statement.execute("SELECT * FROM patchhistory");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM patchhistory");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -295,8 +289,7 @@ public class Menu {
                     break;
 
                 case 17:
-                    statement.execute("SELECT * FROM player");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM player");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -308,8 +301,7 @@ public class Menu {
                     break;
 
                 case 18:
-                    statement.execute("SELECT * FROM rune");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM rune");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -321,8 +313,7 @@ public class Menu {
                     break;
 
                 case 19:
-                    statement.execute("SELECT * FROM runeloadout");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM runeloadout");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
@@ -334,8 +325,7 @@ public class Menu {
                     break;
 
                 case 20:
-                    statement.execute("SELECT * FROM runepath");
-                    resultSet = statement.executeQuery("SELECT * FROM championskin");
+                    resultSet = statement.executeQuery("SELECT * FROM runepath");
                     columnCount = resultSet.getMetaData().getColumnCount();
 
                     while (resultSet.next()) {
