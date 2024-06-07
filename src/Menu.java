@@ -77,6 +77,10 @@ public class Menu {
                 case 2:
 
                     boolean exit2 = false;
+                    Statement statement1 = connection.createStatement();
+                    statement1.execute("USE chaos_conquest");
+
+                    insertMenu(exit2, statement1);
 
                     break;
 
@@ -914,5 +918,9 @@ public class Menu {
             }
             System.out.println();
         }
+    }
+
+    public static void insertMenu(boolean exit, Statement statement){
+
     }
 }
