@@ -209,16 +209,11 @@ public class Menu {
 
                         case 1:
 
-                            System.out.println("Insert the name of the player:");
+                            System.out.println("Insert the name of the player: ,Insert the level of the player: ,Insert the rank of the player: ,Insert the Most Player Champions of the player:");
+
                             String NickName = Lectura.cadena();
-
-                            System.out.println("Insert the level of the player:");
                             int Level = Lectura.numeroEnter();
-
-                            System.out.println("Insert the rank of the player:");
                             int Rank = Lectura.numeroEnter();
-
-                            System.out.println("Insert the Most Player Champions of the player:");
                             int MostPlayedChampion = Lectura.numeroEnter();
 
                             statement.executeQuery("INSERT INTO player(NickName, Level, Rank, MostPlayedChampion) VALUES (NickName, Level, Rank, MostPlayedChampion)");
@@ -228,16 +223,11 @@ public class Menu {
 
                         case 2:
 
-                            System.out.println("Insert the champions ID:");
+                            System.out.println("Insert the champions ID: ,Insert the Winner Team: ,Insert the Match Duration: ,Insert the Match Date:");
+
                             int ChampionsID = Lectura.numeroEnter();
-
-                            System.out.println("Insert the Winner Team:");
                             String WinnerTeam = Lectura.cadena();
-
-                            System.out.println("Insert the Match Duration");
                             Time MatchDuration = Time.valueOf(Lectura.cadena());
-
-                            System.out.println("Insert the Match Date");
                             DateTimeFormatter MatchDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
                             statement.executeQuery("INSERT INTO matchhistory(ChampionsID, WinnerTeam, MatchDuration, MatchDate) VALUES (ChampionsID, WinnerTeam, MatchDuration, MatchDate)");
@@ -247,25 +237,14 @@ public class Menu {
 
                         case 3:
 
-                            System.out.println("Insert the kills:");
+                            System.out.println("Insert the kills: ,Insert the deaths: ,Insert the assists: ,Insert the Gold Earned: ,Insert the Dealt Damage: , Insert the Recived Damage: ,Insert the Team:");
+
                             int Kills = Lectura.numeroEnter();
-
-                            System.out.println("Insert the deaths:");
                             int Deaths = Lectura.numeroEnter();
-
-                            System.out.println("Insert the assists:");
                             int Assists = Lectura.numeroEnter();
-
-                            System.out.println("Insert the Gold Earned:");
                             int GoldEarned = Lectura.numeroEnter();
-
-                            System.out.println("Insert the Dealt Damage:");
                             int DealtDamage = Lectura.numeroEnter();
-
-                            System.out.println("Insert the Recived Damage:");
                             int RecivedDamage = Lectura.numeroEnter();
-
-                            System.out.println("Insert the Team:");
                             String Team = Lectura.cadena();
 
                             statement.executeQuery("INSERT INTO matchstats(Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team) VALUES (Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team)");
@@ -283,6 +262,55 @@ public class Menu {
                     System.out.println("1. Player");
                     System.out.println("2. Match History");
                     System.out.println("3. Match Stats");
+
+                    int Update = Lectura.numeroEnter();
+
+                    switch (Update){
+                        case 0:
+                            break;
+                        case 1:
+
+                            System.out.println("Insert the name of the player: ,Insert the level of the player: ,Insert the rank of the player: ,Insert the Most Player Champions of the player:");
+
+                            String NickName = Lectura.cadena();
+                            int Level = Lectura.numeroEnter();
+                            int Rank = Lectura.numeroEnter();
+                            int MostPlayedChampion = Lectura.numeroEnter();
+
+                            statement.executeQuery("UPDATE player SET Level = " + Level + ", Rank = " + Rank + ", MostPlayedChampion = " + MostPlayedChampion + " WHERE NickName = " + NickName);
+                            System.out.println("Done");
+                            break;
+                        case 2:
+
+                            System.out.println("Insert the champions ID: ,Insert the Winner Team: ,Insert the Match Duration: ,Insert the Match Date:");
+
+                            int ChampionsID = Lectura.numeroEnter();
+                            String WinnerTeam = Lectura.cadena();
+                            Time MatchDuration = Time.valueOf(Lectura.cadena());
+                            DateTimeFormatter MatchDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                            statement.executeQuery("UPDATE matchhistory SET WinnerTeam = " + WinnerTeam + ", MatchDuration = " + MatchDuration + ", MatchDate = " + MatchDate + " WHERE ChampionsID = " + ChampionsID);
+                            System.out.println("Done");
+                            break;
+                        case 3:
+
+                            System.out.println("Insert the kills: ,Insert the deaths: ,Insert the assists: ,Insert the Gold Earned: ,Insert the Dealt Damage: , Insert the Recived Damage: ,Insert the Team:");
+
+                            int Kills = Lectura.numeroEnter();
+                            int Deaths = Lectura.numeroEnter();
+                            int Assists = Lectura.numeroEnter();
+                            int GoldEarned = Lectura.numeroEnter();
+                            int DealtDamage = Lectura.numeroEnter();
+                            int RecivedDamage = Lectura.numeroEnter();
+                            String Team = Lectura.cadena();
+
+                            statement.executeQuery("UPDATE matchstats SET Kills = " + Kills + ", Deaths = " + Deaths + ", Assists = " + Assists + ", GoldEarned = " + GoldEarned + ", DealtDamage = " + DealtDamage + ", RecivedDamage = " + RecivedDamage + ", Team = " + Team + " WHERE Kills = " + Kills);
+                            System.out.println("Done");
+
+                            break;
+                    }
+
+
                     break;
             }
 
