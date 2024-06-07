@@ -48,7 +48,7 @@ public class Menu {
 
         System.out.println("You logged in as an Administrator");
 
-        boolean exit2 = false;
+        boolean exitAdmin = false;
 
         do {
 
@@ -63,7 +63,7 @@ public class Menu {
 
                 case 0:
                     System.out.println("You logged out");
-                    exit2 = true;
+                    exitAdmin = true;
                     break;
 
                 case 1:
@@ -90,12 +90,56 @@ public class Menu {
                 default:
                     System.out.println("Invalid option");
             }
-        } while (!exit2);
+        } while (!exitAdmin);
     }
 
-    public static void Developer(Connection connection) {
+    public static void Developer(Connection connection) throws SQLException {
 
         System.out.println("You logged in as a Developer");
+
+        boolean exitDev = false;
+
+        do {
+
+            System.out.println("Choose an option");
+            System.out.println("0.Close session");
+            System.out.println("1.Select info");
+            System.out.println("2.Insert info");
+            System.out.println("3.Delete info");
+            System.out.println("4.Update info");
+
+            switch (Lectura.numeroEnter()) {
+
+                case 0:
+                    System.out.println("You logged out");
+                    exitDev = true;
+                    break;
+
+                case 1:
+
+                    boolean exit = false;
+                    Statement statement = connection.createStatement();
+                    statement.execute("USE chaos_conquest");
+
+                    selectMenu(exit, statement);
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+
+                    break;
+
+                default:
+                    System.out.println("Invalid option");
+            }
+        } while (!exitDev);
     }
 
     public static void DataAnalist(Connection connection) throws SQLException {
