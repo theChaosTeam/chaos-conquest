@@ -376,10 +376,10 @@ public class Menu {
             System.out.println("15.Check MatchHistory");
             System.out.println("16.Check MatchStats");
             System.out.println("17.Check OwnedChampion");
-            System.out.println("19.Check PatchHistory");
-            System.out.println("21.Check Runes");
-            System.out.println("22.Check Rune Loadouts");
-            System.out.println("23.Check Rune Paths");
+            System.out.println("18.Check PatchHistory");
+            System.out.println("19.Check Runes");
+            System.out.println("20.Check Rune Loadouts");
+            System.out.println("21.Check Rune Paths");
             System.out.println();
 
             int option = Lectura.numeroEnter();
@@ -549,6 +549,116 @@ public class Menu {
                             System.out.println(resultSet.getString(i) + "\t");
                         }
                         System.out.println();
+                    }
+                    break;
+
+                case 13:
+                    resultSet = statement.executeQuery("SELECT * FROM itemstat");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount ; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 14:
+                    resultSet = statement.executeQuery("SELECT * FROM mastery");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 15:
+                    resultSet = statement.executeQuery("SELECT * FROM matchhistory");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 16:
+                    resultSet = statement.executeQuery("SELECT * FROM matchstats");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 17:
+                    System.out.println("Please enter your PlayerID:");
+                    int playerID = Lectura.numeroEnter();
+
+                    resultSet = statement.executeQuery("SELECT * FROM ownedchampion WHERE PlayerID = " + playerID);
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 18:
+                    resultSet = statement.executeQuery("SELECT * FROM patchhistory");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 19:
+                    resultSet = statement.executeQuery("SELECT * FROM rune");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 20:
+                    resultSet = statement.executeQuery("SELECT * FROM runeloadout");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
+                        System.out.println();
+                    }
+                    break;
+
+                case 21:
+                    resultSet = statement.executeQuery("SELECT * FROM rune");
+                    columnCount = resultSet.getMetaData().getColumnCount();
+
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(resultSet.getString(i) + "\t");
+                        }
                     }
                     break;
 
