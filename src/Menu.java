@@ -47,6 +47,17 @@ public class Menu {
 
         System.out.println("You logged in as an Administrator");
 
+        adminMenu(connection);
+    }
+
+    public static void Developer(Connection connection) throws SQLException {
+
+        System.out.println("You logged in as a Developer");
+
+        adminMenu(connection);
+    }
+
+    private static void adminMenu(Connection connection) throws SQLException {
         boolean exit = false;
 
         do {
@@ -100,11 +111,6 @@ public class Menu {
                     System.out.println("Invalid option");
             }
         } while (!exit);
-    }
-
-    public static void Developer(Connection connection) {
-
-        System.out.println("You logged in as a Developer");
     }
 
     public static void DataAnalist(Connection connection) throws SQLException {
@@ -457,262 +463,6 @@ public class Menu {
     }
 
     public static void Player(Connection connection) throws SQLException {
-
-        boolean exit = false;
-        Statement statement = connection.createStatement();
-        statement.execute("USE chaos_conquest");
-
-        do {
-
-            System.out.println("Select the table you want to use or put 0 to close the actual session:");
-            System.out.println("0.Close session");
-            System.out.println("1.Add or see an existing ItemLoadout");
-            System.out.println("2.Add or see an existing RuneLoadout");
-            System.out.println("3.Check players on the server");
-            System.out.println("4.See all Champions");
-            System.out.println("5.Check the abilities of a Champion");
-            System.out.println("6.Check the skins of a Champion");
-            System.out.println("7.Check Clashes");
-            System.out.println("8.Check Clash Participants");
-            System.out.println("9.See Competitive Ranks");
-            System.out.println("10.See Damage Types");
-            System.out.println("11.Check Items");
-            System.out.println("12.Check ItemLoadout");
-            System.out.println("13.Check ItemStats");
-            System.out.println("14.Check Mastery");
-            System.out.println("15.Check MatchHistory");
-            System.out.println("16.Check MatchStats");
-            System.out.println("17.Check OwnedChampion");
-            System.out.println("19.Check PatchHistory");
-            System.out.println("21.Check Runes");
-            System.out.println("22.Check Rune Loadouts");
-            System.out.println("23.Check Rune Paths");
-            System.out.println();
-
-            ResultSet resultSet;
-            int columnCount;
-
-            switch (Lectura.numeroEnter()) {
-
-                case 0:
-
-                    exit = true;
-                    break;
-
-                case 1:
-
-                    try{
-
-                        System.out.println("Insert the number of the ItemID:");
-                        int newItemID = Lectura.numeroEnter();
-
-                        statement.executeUpdate("INSERT INTO itemloadout(ItemID) VALUES (" + newItemID + ")");
-                        System.out.println("Inserting item loadout...");
-                        System.out.println("Done");
-
-                        break;
-
-                    } catch (InputMismatchException e){
-
-                        System.out.println("Error: could not insert the itemloadout, please insert the ItemID (number)");
-                        break;
-                    }
-
-                case 2:
-
-                    try{
-
-                        System.out.println("Insert the number of the RuneID:");
-                        int newRuneID = Lectura.numeroEnter();
-
-                        statement.executeUpdate("INSERT INTO runeloadout(ItemID) VALUES (" + newRuneID + ")");
-                        System.out.println("Inserting rune loadout...");
-                        System.out.println("Done");
-
-                        break;
-
-                    } catch (InputMismatchException e) {
-
-                        System.out.println("Error: could not insert the runeloadout, please insert the ItemID (number)");
-                        break;
-                    }
-
-                case 3:
-
-                    imprimirTabla("player", statement);
-                    break;
-
-                case 4:
-
-                    imprimirTabla("champion", statement);
-                    break;
-
-                case 5:
-
-                    System.out.println("Introduce the ID of the champion you want to see the abilities of:");
-                    int abilityChampionID = Lectura.numeroEnter();
-
-                    resultSet = statement.executeQuery("SELECT * from championabilities WHERE championID = " + abilityChampionID);
-                    columnCount = resultSet.getMetaData().getColumnCount();
-
-                    while (resultSet.next()) {
-
-                        for (int i = 1; i <= columnCount; i++) {
-
-                            System.out.println(resultSet.getString(i) + "\t");
-                        }
-                        System.out.println();
-                    }
-                    break;
-
-                case 6:
-
-                    System.out.println("Introduce the ID of the champion you want to see the skins of:");
-                    int skinChampionID = Lectura.numeroEnter();
-
-                    resultSet = statement.executeQuery("SELECT * from championabilities WHERE championID = " + skinChampionID);
-                    columnCount = resultSet.getMetaData().getColumnCount();
-
-                    while (resultSet.next()) {
-
-                        for (int i = 1; i <= columnCount; i++) {
-
-                            System.out.println(resultSet.getString(i) + "\t");
-                        }
-                        System.out.println();
-                    }
-                    break;
-
-                case 7:
-
-                    imprimirTabla("clash", statement);
-                    break;
-
-                case 8:
-
-                    System.out.println("Introduce the ID of the clash from who you want to see the participants of:");
-                    int participantsClashID = Lectura.numeroEnter();
-
-                    resultSet = statement.executeQuery("SELECT * FROM clashparticipant WHERE ClashID = " + participantsClashID);
-                    columnCount = resultSet.getMetaData().getColumnCount();
-
-                    while (resultSet.next()) {
-
-                        for (int i = 1; i <= columnCount; i++) {
-
-                            System.out.println(resultSet.getString(i) + "\t");
-                        }
-                        System.out.println();
-                    }
-
-                    break;
-
-                default:
-
-                    System.out.println("Invalid option");
-                    break;
-            }
-        } while (!exit);
-    }
-
-    public static void PublicVisitant(Connection connection) throws SQLException{
-
-        boolean exit = false;
-        Statement statement = connection.createStatement();
-        statement.execute("USE chaos_conquest");
-
-        System.out.println("You logged in as a Public Visitant");
-
-        do {
-
-            System.out.println("Select the table you want to see or put 0 to close the actual session:");
-            System.out.println("0.Close session");
-            System.out.println("1.Champion");
-            System.out.println("2.ChampionAbility");
-            System.out.println("3.CompetitiveRank");
-            System.out.println("4.DamageType");
-            System.out.println("5.Item");
-            System.out.println("6.ItemStat");
-            System.out.println("7.PatchHistory");
-            System.out.println("8.Player");
-            System.out.println("9.Rune");
-
-            switch (Lectura.numeroEnter()) {
-
-                case 0:
-
-                    exit = true;
-                    break;
-
-                case 1:
-
-                    imprimirTabla("champion", statement);
-
-                    break;
-
-                case 2:
-
-                    imprimirTabla("championability", statement);
-
-                    break;
-
-                case 3:
-
-                    imprimirTabla("competitiveRank", statement);
-
-                    break;
-
-                case 4:
-
-                    imprimirTabla("damageType", statement);
-
-                    break;
-
-                case 5:
-
-                    imprimirTabla("item", statement);
-
-                    break;
-
-                case 6:
-
-                    imprimirTabla("itemstat", statement);
-
-                    break;
-
-                case 7:
-
-                    imprimirTabla("patchHistory", statement);
-
-                    break;
-
-                case 8:
-
-                    imprimirTabla("player", statement);
-
-                    break;
-
-                case 9:
-
-                    imprimirTabla("rune", statement);
-
-                    break;
-
-                default:
-
-                    System.out.println("Invalid option");
-                    break;
-            }
-
-        } while (!exit);
-    }
-
-    public static void ComunityMod(Connection connection) {
-
-        System.out.println("You logged in as Community Moderator");
-    }
-
-    public static void Player(Connection connection) throws SQLException {
         boolean exit = false;
         Statement statement = connection.createStatement();
         statement.execute("USE chaos_conquest");
@@ -1024,7 +774,7 @@ public class Menu {
                     }
                     break;
 
-                    default:
+                default:
 
                     System.out.println("Invalid option");
                     break;
@@ -1032,9 +782,96 @@ public class Menu {
         } while (!exit);
     }
 
-    public static void PublicVisitant(Connection connection) {
+    public static void PublicVisitant(Connection connection) throws SQLException{
+
+        boolean exit = false;
+        Statement statement = connection.createStatement();
+        statement.execute("USE chaos_conquest");
 
         System.out.println("You logged in as a Public Visitant");
+
+        do {
+
+            System.out.println("Select the table you want to see or put 0 to close the actual session:");
+            System.out.println("0.Close session");
+            System.out.println("1.Champion");
+            System.out.println("2.ChampionAbility");
+            System.out.println("3.CompetitiveRank");
+            System.out.println("4.DamageType");
+            System.out.println("5.Item");
+            System.out.println("6.ItemStat");
+            System.out.println("7.PatchHistory");
+            System.out.println("8.Player");
+            System.out.println("9.Rune");
+
+            switch (Lectura.numeroEnter()) {
+
+                case 0:
+
+                    exit = true;
+                    break;
+
+                case 1:
+
+                    imprimirTabla("champion", statement);
+
+                    break;
+
+                case 2:
+
+                    imprimirTabla("championability", statement);
+
+                    break;
+
+                case 3:
+
+                    imprimirTabla("competitiveRank", statement);
+
+                    break;
+
+                case 4:
+
+                    imprimirTabla("damageType", statement);
+
+                    break;
+
+                case 5:
+
+                    imprimirTabla("item", statement);
+
+                    break;
+
+                case 6:
+
+                    imprimirTabla("itemstat", statement);
+
+                    break;
+
+                case 7:
+
+                    imprimirTabla("patchHistory", statement);
+
+                    break;
+
+                case 8:
+
+                    imprimirTabla("player", statement);
+
+                    break;
+
+                case 9:
+
+                    imprimirTabla("rune", statement);
+
+                    break;
+
+                default:
+
+                    System.out.println("Invalid option");
+                    break;
+            }
+
+        } while (!exit);
     }
 
     public static int checkRole() {
