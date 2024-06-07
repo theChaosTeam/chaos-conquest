@@ -45,10 +45,9 @@ public class Menu {
 
     public static void Admin(Connection connection) throws SQLException{
 
-
         System.out.println("You logged in as an Administrator");
 
-        boolean exit2 = false;
+        boolean exit = false;
 
         do {
 
@@ -63,34 +62,40 @@ public class Menu {
 
                 case 0:
                     System.out.println("You logged out");
-                    exit2 = true;
+                    exit = true;
                     break;
 
                 case 1:
 
-                    boolean exit = false;
+                    boolean exit1 = false;
                     Statement statement = connection.createStatement();
                     statement.execute("USE chaos_conquest");
 
-                    selectMenu(exit, statement);
+                    selectMenu(exit1, statement);
                     break;
 
                 case 2:
+
+                    boolean exit2 = false;
 
                     break;
 
                 case 3:
 
+                    boolean exit3 = false;
+
                     break;
 
                 case 4:
+
+                    boolean exit4 = false;
 
                     break;
 
                 default:
                     System.out.println("Invalid option");
             }
-        } while (!exit2);
+        } while (!exit);
     }
 
     public static void Developer(Connection connection) {
@@ -201,6 +206,8 @@ public class Menu {
                     System.out.println("2. Match History");
                     System.out.println("3. Match Stats");
 
+                    String query = "INSERT INTO";
+
                     switch (Lectura.numeroEnter()){
 
                         case 0:
@@ -221,7 +228,9 @@ public class Menu {
                             System.out.println("Insert the Most Player Champions of the player:");
                             int MostPlayedChampion = Lectura.numeroEnter();
 
-                            statement.executeQuery("INSERT INTO player(NickName, Level, Rank, MostPlayedChampion) VALUES (NickName, Level, Rank, MostPlayedChampion)");
+                            query = query + " Player('Nickname', 'Level', `Rank`, 'MostPlayedChampion') VALUES(" + NickName + ", " + Level + " ," + Rank + ", " + MostPlayedChampion + ")";
+
+                            statement.executeQuery(query);
                             System.out.println("Done");
 
                             break;
@@ -240,7 +249,8 @@ public class Menu {
                             System.out.println("Insert the Match Date");
                             DateTimeFormatter MatchDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-                            statement.executeQuery("INSERT INTO matchhistory(ChampionsID, WinnerTeam, MatchDuration, MatchDate) VALUES (ChampionsID, WinnerTeam, MatchDuration, MatchDate)");
+                            query = query + " MatchHistory('ChampionsID', 'WinnerTeam', 'MatchDuration', 'MatchDate') VALUES(" + ChampionsID + ", " + WinnerTeam + ", " + MatchDuration + ", " + MatchDate + ")";
+                            statement.executeQuery(query);
                             System.out.println("Done");
 
                             break;
@@ -268,7 +278,9 @@ public class Menu {
                             System.out.println("Insert the Team:");
                             String Team = Lectura.cadena();
 
-                            statement.executeQuery("INSERT INTO matchstats(Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team) VALUES (Kills, Deaths, Assists, GoldEarned, DealtDamage, RecivedDamage, Team)");
+                            query = query + " MatchStats('Kills', 'Deaths', 'Assists', 'GoldEarned', 'DealtDamage', 'RecivedDamage', 'Team') VALUES(" + Kills + ", " + Deaths + ", " + Assists + ", " + GoldEarned + ", " + DealtDamage + ", " + RecivedDamage + ", " + Team + ")";
+
+                            statement.executeQuery(query);
                             System.out.println("Done");
 
                             break;
@@ -283,7 +295,156 @@ public class Menu {
                     System.out.println("1. Player");
                     System.out.println("2. Match History");
                     System.out.println("3. Match Stats");
-                    break;
+
+                    String query2 = "UPDATE";
+
+                    switch (Lectura.numeroEnter()) {
+
+                        case 0:
+
+
+                            break;
+
+                        case 1:
+
+                            System.out.println("Wich column do you want to update");
+                            System.out.println("0. Back");
+                            System.out.println("1. Nickname");
+                            System.out.println("2. Level");
+
+                            switch (Lectura.numeroEnter()) {
+
+                                case 0:
+
+                                    break;
+
+                                case 1:
+
+                                    System.out.println("Insert the new Nickname");
+                                    String Nickname = Lectura.cadena();
+                                    query2 = query2 + " Player SET Nickname = " + Nickname + " WHERE Nickname = " + Nickname;
+                                    statement.executeQuery(query2);
+                                    System.out.println("Done");
+
+                                    break;
+
+                                case 2:
+
+                                    System.out.println("Insert the new Level");
+                                    int Level = Lectura.numeroEnter();
+                                    System.out.println("Insert the playerID");
+                                    int playerID = Lectura.numeroEnter();
+                                    query2 = query2 + " Player SET Level = " + Level + " WHERE ID = " + playerID;
+                                    statement.executeQuery(query2);
+                                    System.out.println("Done");
+
+                                    break;
+                            }
+
+                            break;
+
+                        case 2:
+
+                            System.out.println("Wich column do you want to update");
+                            System.out.println("0. Back");
+                            System.out.println("1. WinnerTeam");
+                            System.out.println("2. MatchDuration");
+                            System.out.println("3. MatchDate");
+                            switch (Lectura.numeroEnter()) {
+
+                                case 0:
+
+                                    break;
+
+                                case 1:
+
+                                    System.out.println("Insert the new WinnerTeam");
+                                    String WinnerTeam = Lectura.cadena();
+                                    System.out.println("Insert the MatchID");
+                                    int MatchID = Lectura.numeroEnter();
+                                    query2 = query2 + " MatchHistory SET WinnerTeam = " + WinnerTeam + " WHERE ID = " + MatchID;
+                                    statement.executeQuery(query2);
+                                    System.out.println("Done");
+
+                                    break;
+
+                                case 2:
+
+                                    System.out.println("Insert the new MatchDuration");
+                                    Time MatchDuration = Time.valueOf(Lectura.cadena());
+                                    System.out.println("Insert the MatchID");
+                                    int MatchID2 = Lectura.numeroEnter();
+                                    query2 = query2 + " MatchHistory SET MatchDuration = " + MatchDuration + " WHERE ID = " + MatchID2;
+                                    statement.executeQuery(query2);
+                                    System.out.println("Done");
+
+                                    break;
+
+                                case 3:
+
+                                    System.out.println("Insert the new MatchDate");
+                                    Date MatchDate = Date.valueOf(Lectura.cadena());
+                                    System.out.println("Insert the MatchID");
+                                    int MatchID3 = Lectura.numeroEnter();
+                                    query2 = query2 + " MatchHistory SET MatchDate = " + MatchDate + " WHERE ID = " + MatchID3;
+                                    statement.executeQuery(query2);
+                                    System.out.println("Done");
+
+                                    break;
+                            }
+
+                            break;
+
+                        case 3:
+
+                            System.out.println("Wich column do you want to update");
+                            System.out.println("0. Back");
+                            System.out.println("1. Kills");
+                            System.out.println("2. Deaths");
+                            System.out.println("3. GoldEarned");
+
+                            switch (Lectura.numeroEnter()) {
+
+                                case 0:
+
+                                    break;
+
+                                case 1:
+
+                                    System.out.println("Insert the new Kills");
+                                    int Kills = Lectura.numeroEnter();
+                                    System.out.println("Insert the MatchID");
+                                    int MatchID = Lectura.numeroEnter();
+                                    query2 = query2 + " matchstats SET Kills = " + Kills + " WHERE MatchID = " + MatchID;
+                                    statement.executeQuery(query2);
+                                    System.out.println("Done");
+
+                                    break;
+
+                                case 2:
+
+                                    System.out.println("Insert the new Deaths");
+                                    int Deaths = Lectura.numeroEnter();
+                                    System.out.println("Insert the MatchID");
+                                    int MatchID2 = Lectura.numeroEnter();
+                                    query2 = query2 + " matchstats SET Deaths = " + Deaths + " WHERE MatchID = " + MatchID2;
+                                    statement.executeQuery(query2);
+                                    System.out.println("Done");
+
+                                    break;
+
+                                case 3:
+
+                                    System.out.println("Insert the new GoldEarned");
+                                    int GoldEarned = Lectura.numeroEnter();
+                                    System.out.println("Insert the MatchID");
+                                    int MatchID3 = Lectura.numeroEnter();
+                                    query2 = query2 + " matchstats SET GoldEarned = " + GoldEarned + " WHERE MatchID = " + MatchID3;
+                                    break;
+                            }
+
+                            break;
+                    }
             }
 
         } while (!exit);
@@ -1001,5 +1162,4 @@ public class Menu {
             }
         } while (!exit);
     }
-
 }
