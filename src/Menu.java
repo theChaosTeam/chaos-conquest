@@ -489,12 +489,9 @@ public class Menu {
                             break;
                     }
 
-
-
-
                     break;
                 case 3:
-                    System.out.println("What table do you want update?");
+                    System.out.println("What table do you want Update?");
                     System.out.println("0. Back");
                     System.out.println("1. Player");
                     System.out.println("2. Match History");
